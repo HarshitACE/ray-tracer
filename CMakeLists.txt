@@ -17,7 +17,9 @@ include(cmake/variables.cmake)
 
 add_library(
     ray-tracing-one-weekend_lib OBJECT
-    source/lib.cpp
+    source/libs/vec3.hpp
+    source/libs/color.hpp
+    source/libs/ray.hpp
 )
 
 target_include_directories(

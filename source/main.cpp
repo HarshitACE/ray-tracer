@@ -1,10 +1,30 @@
 #include <iostream>
 
-#include "libs/ray.hpp"
 #include "libs/color.hpp"
+#include "libs/ray.hpp"
 #include "libs/vec3.hpp"
 
+bool hit_sphere(const point3& centre, double radius, const ray& r) {
+  // EQUATION FORMED:
+  // (P - C) . (P - C) = r^2;  where P -> P(t) = A + tb
+  // P -> P(t) = A + tb; A is the origin of the ray and b is the direction
+  // t^2b.b - 2tb.(A-C) + (A-C).(A-C) - r^2 = 0
+  //
+  // Now to calculate if the sphere is ever hit by the ray all we have to do is make sure the discriminant
+  // of the quadratic equation is > 0 (=0 will glance the sphere)
+  vec3 oc = r.origin() - centre;
+  auto a = dot(r.direction(), r.direction());
+  auto b = 2.0 * dot(r.direction(), oc);
+  auto c = dot(oc, oc) - radius * radius;
+  auto discriminant = b * b - 4 * a * c;
+  return (discriminant > 0);
+}
+
 auto ray_color(const ray& ray) {
+  // If the ray hits sphere color it red
+  if (hit_sphere(point3(0, 0, -1), 0.5, ray)) {
+    return color(1, 0, 0);
+  }
   vec3 unit_direction = unit_vector(ray.direction());
   auto t = 0.5 * (unit_direction.y() + 1.0);
   return (1.0 - t) * color(1.0, 1.0, 1.0) + t * color(0.5, 0.7, 1.0);

@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.14)
 
 include(cmake/prelude.cmake)
 
+set(CMAKE_OSX_SYSROOT macosx) # Ignored on other platfroms
+
 project(
     ray-tracing-one-weekend
     VERSION 0.1.0
@@ -12,6 +14,8 @@ project(
 
 include(cmake/project-is-top-level.cmake)
 include(cmake/variables.cmake)
+
+set(EXPORT_COMPILE_COMMANDS ON)
 
 # ---- Declare library ----
 

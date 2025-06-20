@@ -1,9 +1,11 @@
 #include <cmath>
 #include <iostream>
+#include <memory>
 
+#include "objects/sphere.hpp"
+#include "rtweekend.hpp"
 #include "libs/color.hpp"
-#include "libs/ray.hpp"
-#include "libs/vec3.hpp"
+#include "objects/hittable_list.hpp"
 
 double hit_sphere(const point3& centre, double radius, const ray& r) {
   vec3 oc = r.origin() - centre;
@@ -22,16 +24,14 @@ double hit_sphere(const point3& centre, double radius, const ray& r) {
   return -1.0;
 }
 
-auto ray_color(const ray& ray) {
-  // If the ray hits sphere color it red
-  auto t = hit_sphere(point3(0, 0, -1), 0.5, ray);
-  if (t > 0.0) {
-    vec3 N = unit_vector(ray.at(t) - vec3(0, 0, -1));
-    return 0.5 * color(N.x() + 1, N.y() + 1, N.z() + 1);
-  }
+auto ray_color(const ray& ray, const hittable& world) {
+    hit_record rec;
+    if(world.hit(ray, 0, infinity, rec)) {
+        return 0.5 * (rec.normal + color(1,1,1));
+    }
 
   vec3 unit_direction = unit_vector(ray.direction());
-  t = 0.5 * (unit_direction.y() + 1.0);
+  auto t = 0.5 * (unit_direction.y() + 1.0);
   return (1.0 - t) * color(1.0, 1.0, 1.0) + t * color(0.5, 0.7, 1.0);
 }
 
@@ -41,6 +41,11 @@ auto main() -> int {
   const int image_width = 400;
   const int image_height = static_cast<int>(image_width / aspect_ratio);
   const double blue_val = 0.25;
+
+  // World
+  hittable_list world;
+  world.add(std::make_shared<sphere>(point3(0,0,-1), 0.5));
+  world.add(std::make_shared<sphere>(point3(0,-100.5,-1), 100));
 
   // Camera
   auto viewport_height = 2.0;
@@ -61,7 +66,7 @@ auto main() -> int {
       auto u = static_cast<double>(i) / (image_width - 1);
       auto v = static_cast<double>(j) / (image_height - 1);
       ray r(origin, lower_left_corner + u * horizontal + v * vertical - origin);
-      color pixel_color = ray_color(r);
+      color pixel_color = ray_color(r, world);
       write_color(std::cout, pixel_color);
     }
   }

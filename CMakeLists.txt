@@ -26,27 +26,47 @@ add_library(
     source/libs/ray.hpp
 )
 
+add_library(
+    ray-tracing-one-weekend_objects-lib OBJECT
+    source/objects/hittable.hpp
+    source/objects/hittable_list.hpp
+    source/objects/sphere.hpp
+    source/objects/sphere.cpp
+    )
+
 target_include_directories(
     ray-tracing-one-weekend_lib ${warning_guard}
     PUBLIC
     "\$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/source>"
 )
 
+target_include_directories(
+    ray-tracing-one-weekend_objects-lib ${warning_guard}
+    PUBLIC
+    "\$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/source>"
+)
+
 target_compile_features(ray-tracing-one-weekend_lib PUBLIC cxx_std_20)
+target_compile_features(ray-tracing-one-weekend_objects-lib PUBLIC cxx_std_20)
 
 find_package(fmt REQUIRED)
 target_link_libraries(ray-tracing-one-weekend_lib PRIVATE fmt::fmt)
 
 # ---- Declare executable ----
 
-add_executable(ray-tracing-one-weekend_exe source/main.cpp)
+add_executable(ray-tracing-one-weekend_exe 
+    source/main.cpp
+    source/rtweekend.hpp)
+
 add_executable(ray-tracing-one-weekend::exe ALIAS ray-tracing-one-weekend_exe)
 
 set_property(TARGET ray-tracing-one-weekend_exe PROPERTY OUTPUT_NAME ray-tracing-one-weekend)
 
 target_compile_features(ray-tracing-one-weekend_exe PRIVATE cxx_std_20)
 
-target_link_libraries(ray-tracing-one-weekend_exe PRIVATE ray-tracing-one-weekend_lib)
+target_link_libraries(ray-tracing-one-weekend_exe PRIVATE
+    ray-tracing-one-weekend_lib
+    ray-tracing-one-weekend_objects-lib)
 
 # ---- Install rules ----
 

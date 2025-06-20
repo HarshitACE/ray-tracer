@@ -3,7 +3,7 @@
 #include "hittable.hpp"
 #include "sphere.hpp"
 
-auto sphere::hit(const ray& r, double t_min, double t_max, hit_record& rec) const -> bool override {
+auto sphere::hit(const ray& r, double t_min, double t_max, hit_record& rec) const -> bool {
   // EQUATION FORMED:
   // (P - C) . (P - C) = r^2;  where P -> P(t) = A + tb
   // P -> P(t) = A + tb; A is the origin of the ray and b is the direction

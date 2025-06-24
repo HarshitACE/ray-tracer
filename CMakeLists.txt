@@ -24,6 +24,7 @@ add_library(
     source/libs/vec3.hpp
     source/libs/color.hpp
     source/libs/ray.hpp
+    source/libs/camera.hpp
 )
 
 add_library(

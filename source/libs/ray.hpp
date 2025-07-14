@@ -1,5 +1,4 @@
-#ifndef RAY_H
-#define RAY_H
+#pragma once
 
 #include "vec3.hpp"
 
@@ -16,4 +15,3 @@ class ray {
 
   auto at(double t) const -> point3 { return orig + (t * dir); }
 };
-#endif

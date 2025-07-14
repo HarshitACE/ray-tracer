@@ -1,7 +1,7 @@
-#ifndef CAMERA_H
-#define CAMERA_H
+#pragma once
 
-#include "../rtweekend.hpp"
+#include "vec3.hpp"
+#include "ray.hpp"
 
 class camera {
  public:
@@ -27,4 +27,3 @@ class camera {
   vec3 horizontal;
   vec3 vertical;
 };
-#endif

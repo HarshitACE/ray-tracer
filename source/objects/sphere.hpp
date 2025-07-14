@@ -1,7 +1,5 @@
-#ifndef SPHERE_H
-#define SPHERE_H
+#pragma once
 
-#include "../libs/vec3.hpp"
 #include "hittable.hpp"
 
 class sphere : public hittable {
@@ -15,5 +13,3 @@ class sphere : public hittable {
   point3 m_center;
   double m_radius;
 };
-
-#endif

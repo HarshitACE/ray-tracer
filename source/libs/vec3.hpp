@@ -1,9 +1,10 @@
-#ifndef VEC3_H
-#define VEC3_H
+#pragma once
 
 #include <array>
 #include <cmath>
 #include <iostream>
+
+#include "../rtweekend.hpp"
 
 class vec3 {
  public:
@@ -39,6 +40,12 @@ class vec3 {
   auto length() const -> double { return std::sqrt(length_squared()); }
 
   auto length_squared() const -> double { return e[0] * e[0] + e[1] * e[1] + e[2] * e[2]; }
+
+  inline static auto random() -> vec3 { return vec3(random_double(), random_double(), random_double()); }
+
+  inline static auto random(double min, double max) -> vec3 {
+    return vec3(random_double(min, max), random_double(min, max), random_double(min, max));
+  }
 };
 
 // Type aliases so it can be used in different contexts with different names
@@ -86,4 +93,13 @@ inline auto cross(const vec3& u, const vec3& v) -> vec3 {
 inline auto unit_vector(vec3 v) -> vec3 {
   return v / v.length();
 }
-#endif
+
+inline auto random_in_unit_sphere() -> vec3 {
+  while (true) {
+    auto rand_point = vec3::random(-1, 1);
+    if (rand_point.length_squared() >= 1) {
+      continue;
+    }
+    return rand_point;
+  }
+}

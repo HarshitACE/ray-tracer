@@ -1,5 +1,5 @@
-#ifndef RTWEEKEND_H
-#define RTWEEKEND_H
+#pragma once
+
 #include <cmath>
 #include <random>
 #include <limits>
@@ -26,14 +26,8 @@ inline auto random_double(double min, double max) -> double {
     return distribution(generator);
 }
 
-inline double clamp(double x, double min, double max) {
+inline auto clamp(double x, double min, double max) -> double {
     if (x < min) return min;
     if (x > max) return max;
     return x;
 }
-
-// Common Headers
-
-#include "libs/ray.hpp"
-#include "libs/vec3.hpp"
-#endif

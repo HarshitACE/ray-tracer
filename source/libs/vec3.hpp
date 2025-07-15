@@ -103,3 +103,15 @@ inline auto random_in_unit_sphere() -> vec3 {
     return rand_point;
   }
 }
+
+inline auto random_unit_vector() -> vec3 {
+    return unit_vector(random_in_unit_sphere());
+}
+
+inline auto random_in_hemisphere(const vec3& normal) -> vec3 {
+    vec3 in_unit_sphere = random_in_unit_sphere();
+    if (dot(in_unit_sphere, normal) > 0.0) {
+        return in_unit_sphere;
+    }
+    return -in_unit_sphere;
+}

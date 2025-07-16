@@ -34,6 +34,8 @@ add_library(
     source/objects/sphere.hpp
     source/objects/sphere.cpp
     source/objects/material.hpp
+    source/objects/lambertian.hpp
+    source/objects/lambertian.cpp
     )
 
 target_include_directories(

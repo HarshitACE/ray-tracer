@@ -6,6 +6,7 @@
 #include "libs/color.hpp"
 #include "libs/vec3.hpp"
 #include "objects/hittable_list.hpp"
+#include "objects/lambertian.hpp"
 #include "objects/sphere.hpp"
 
 double hit_sphere(const point3& centre, double radius, const ray& r) {
@@ -53,8 +54,13 @@ auto main() -> int {
 
   // World
   hittable_list world;
-  world.add(std::make_shared<sphere>(point3(0, 0, -1), 0.5));
-  world.add(std::make_shared<sphere>(point3(0, -100.5, -1), 100));
+
+  auto material_ground = std::make_shared<lambertian>(color(0.8, 0.8, 0.0));
+  auto material_center = std::make_shared<lambertian>(color(0.7, 0.3, 0.3));
+
+  world.add(std::make_shared<sphere>(point3(0.0, -100.5, -1.0), 100.0, material_ground));
+  world.add(std::make_shared<sphere>(point3(0,0, -1), 0.5, material_center));
+  world.add(std::make_shared<sphere>(point3(0, -100.5, -1), 100, material_center));
 
   // Camera
   camera cam;

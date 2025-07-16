@@ -35,6 +35,12 @@ class vec3 {
     return *this;
   }
 
+  auto near_zero() const -> bool {
+      // Return true if the vector is close to zero in all dimension
+      const auto s = 1e-8;
+      return (fabs(e[0]) < s) && (fabs(e[1]) < s) && (fabs(e[2]) < s);
+  }
+
   auto operator/=(const double t) -> vec3& { return *this *= 1 / t; }
 
   auto length() const -> double { return std::sqrt(length_squared()); }

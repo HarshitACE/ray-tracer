@@ -33,6 +33,7 @@ auto sphere::hit(const ray& r, double t_min, double t_max, hit_record& rec) cons
   rec.p = r.at(rec.t);
   vec3 outward_normal = (rec.p - m_center) / m_radius;
   rec.set_face_normal(r, outward_normal);
+  rec.mat_ptr = m_material_ptr;
 
   return true;
 }

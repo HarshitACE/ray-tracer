@@ -33,6 +33,7 @@ add_library(
     source/objects/hittable_list.hpp
     source/objects/sphere.hpp
     source/objects/sphere.cpp
+    source/objects/material.hpp
     )
 
 target_include_directories(

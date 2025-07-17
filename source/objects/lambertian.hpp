@@ -9,8 +9,6 @@ class lambertian : public material {
 
   lambertian(const color& a) : albedo(a){};
 
-  virtual ~lambertian() = default;
-
   virtual auto scatter(const ray& r_in, const hit_record& rec, color& attenuation,
                        ray& scattered) const -> bool override;
 };

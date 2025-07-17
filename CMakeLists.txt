@@ -36,6 +36,7 @@ add_library(
     source/objects/material.hpp
     source/objects/lambertian.hpp
     source/objects/lambertian.cpp
+    source/objects/metal.hpp
     )
 
 target_include_directories(

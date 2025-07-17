@@ -36,9 +36,9 @@ class vec3 {
   }
 
   auto near_zero() const -> bool {
-      // Return true if the vector is close to zero in all dimension
-      const auto s = 1e-8;
-      return (fabs(e[0]) < s) && (fabs(e[1]) < s) && (fabs(e[2]) < s);
+    // Return true if the vector is close to zero in all dimension
+    const auto s = 1e-8;
+    return (fabs(e[0]) < s) && (fabs(e[1]) < s) && (fabs(e[2]) < s);
   }
 
   auto operator/=(const double t) -> vec3& { return *this *= 1 / t; }
@@ -110,14 +110,18 @@ inline auto random_in_unit_sphere() -> vec3 {
   }
 }
 
+inline auto reflect(const vec3& v, const vec3& n) {
+  return v - 2 * dot(v, n) * n;
+}
+
 inline auto random_unit_vector() -> vec3 {
-    return unit_vector(random_in_unit_sphere());
+  return unit_vector(random_in_unit_sphere());
 }
 
 inline auto random_in_hemisphere(const vec3& normal) -> vec3 {
-    vec3 in_unit_sphere = random_in_unit_sphere();
-    if (dot(in_unit_sphere, normal) > 0.0) {
-        return in_unit_sphere;
-    }
-    return -in_unit_sphere;
+  vec3 in_unit_sphere = random_in_unit_sphere();
+  if (dot(in_unit_sphere, normal) > 0.0) {
+    return in_unit_sphere;
+  }
+  return -in_unit_sphere;
 }

@@ -5,11 +5,11 @@
 #include "libs/camera.hpp"
 #include "libs/color.hpp"
 #include "libs/vec3.hpp"
+#include "objects/dielectric.hpp"
 #include "objects/hittable_list.hpp"
 #include "objects/lambertian.hpp"
 #include "objects/metal.hpp"
 #include "objects/sphere.hpp"
-#include "objects/dielectric.hpp"
 
 double hit_sphere(const point3& centre, double radius, const ray& r) {
   vec3 oc = r.origin() - centre;
@@ -62,9 +62,9 @@ auto main() -> int {
   hittable_list world;
 
   auto material_ground = std::make_shared<lambertian>(color(0.8, 0.8, 0.0));
-  auto material_center = std::make_shared<dielectric>(1.5);
+  auto material_center = std::make_shared<lambertian>(color(0.1, 0.2, 0.5));
   auto material_left = std::make_shared<dielectric>(1.5);
-  auto material_right = std::make_shared<metal>(color(0.8, 0.6, 0.2), 1.0);
+  auto material_right = std::make_shared<metal>(color(0.8, 0.6, 0.2), 0.0);
 
   world.add(std::make_shared<sphere>(point3(0.0, -100.5, -1.0), 100.0, material_ground));
   world.add(std::make_shared<sphere>(point3(0, 0, -1), 0.5, material_center));

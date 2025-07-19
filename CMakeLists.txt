@@ -37,6 +37,7 @@ add_library(
     source/objects/lambertian.hpp
     source/objects/lambertian.cpp
     source/objects/metal.hpp
+    source/objects/dielectric.hpp
     )
 
 target_include_directories(

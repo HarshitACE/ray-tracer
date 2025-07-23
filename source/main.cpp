@@ -73,9 +73,8 @@ auto main() -> int {
   world.add(std::make_shared<sphere>(point3(0.0, 0.0, -1.0), 0.5, material_center));
   world.add(std::make_shared<sphere>(point3(-1.0, 0.0, -1.0), 0.5, material_left));
   world.add(std::make_shared<sphere>(point3(-1.0, 0.0, -1.0), -0.45, material_left));
-  world.add(std::make_shared<sphere>(
-      point3(1.0, 0.0, -1.0), 0.5,
-      material_right));  // world.add(std::make_shared<sphere>(point3(-R, 0, -1), R, material_left));
+  world.add(std::make_shared<sphere>(point3(1.0, 0.0, -1.0), 0.5, material_right));
+  // world.add(std::make_shared<sphere>(point3(-R, 0, -1), R, material_left));
   // world.add(std::make_shared<sphere>(point3(R, 0, -1), R, material_right));
 
   // Camera

@@ -78,7 +78,7 @@ auto main() -> int {
   // world.add(std::make_shared<sphere>(point3(R, 0, -1), R, material_right));
 
   // Camera
-  point3 lookfrom(3, 3, 2);
+  point3 lookfrom(1, 1, 6);
   point3 lookat(0, 0, -1);
   vec3 vup(0, 1, 0);
   auto dist_to_focus = (lookfrom - lookat).length();
